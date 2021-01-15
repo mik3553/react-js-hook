@@ -3,10 +3,16 @@ import ProductItemList from "./ProductItemList";
 import Buttons from "./Buttons";
 
 const ProductList = ({products, next, previous, current, navigate}) => {
-    const allProducts = products.slice(current , current +5).map((product, index ) => <ProductItemList key={product.productId}
-                                                                                               product={product}
-                                                                                               current={current} index={index}
-                                                                                               navigate={()=>navigate(index)} />)
+
+    const allProducts = products
+        .map((product, index ) =>
+            <ProductItemList key={product.productId} product={product}
+                             current={current} index={index}
+                             navigate={()=>navigate(index)}
+            />)
+        .slice(current >= products.length -5 ? products.length -5 : current  , current + 5)
+
+
     return (
         <section>
             <div>
